@@ -1,0 +1,34 @@
+.card_container {
+  margin-right: 10%;
+  margin-left: 10%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card_title {
+  margin-bottom: 10px;
+}
+
+.card_element {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+.card_element_icon {
+  padding-right: 10px;
+}
+
+.card_element_block {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.text_container{
+  text-align: start;
+}
