@@ -12,40 +12,42 @@ const styles = {
     },
 };
 
-class QR extends React.Component {
-    state = {
-        delay: 300,
-        result: null,
-        status: 'idle',
+const QrReaderComponent = ({status, onClose}) => {
+    const isOpen = status
+    const output = {};
+
+    const handleError = (err) => {
+        console.log("error ", err);
     }
 
-    handleScan = (data) => {
+    const handleScan = (data) => {
         if (data) {
             try {
                 let d = JSON.parse(data?.text)
                 if (isObject(d)) {
                     if (d['device_id']) {
-                        this.handleDevice(d['device_id'])
+                        onClose()
+                        handleDevice(d['device_id'])
                     }
                 }
             } catch (err) {
                 console.log(err)
             }
         }
-    };
+    }
 
-    handleDevice = (device_id) => {
+    const handleDevice = (device_id) => {
         $api.get(`/api/check_device/${device_id}`)
             .then(res => {
                 if (res.status === 204) {
-                    this.addNewDevice(device_id)
+                    addNewDevice(device_id)
                 } else if (res.status === 200) {
-                    this.changeDeviceStatus(device_id)
+                    changeDeviceStatus(device_id)
                 }
             })
     }
 
-    addNewDevice = (device_id) => {
+    const addNewDevice = (device_id) => {
         $api.post('/api/add_defibrillator', {
             device_id: device_id,
             defibrillator_name: 'Test Name 1',
@@ -58,46 +60,35 @@ class QR extends React.Component {
             })
     }
 
-    changeDeviceStatus = (device_id) => {
+    const changeDeviceStatus = (device_id) => {
         $api.put(`/api/service_device/${device_id}`)
             .then(res => {
                 console.log(res)
             })
     }
 
-
-    handleError = (err) => {
-        console.log("error ", err);
-    };
-
-    render() {
-        const isOpen = this.props.status
-        const {result, status} = this.state;
-        const output = {};
-
-        if (isOpen) {
-            output.reader = (
-                <div style={styles.reader}>
-                    <QrReader
-                        delay={this.state.delay}
-                        onError={this.handleError}
-                        onResult={this.handleScan}
-                        style={{width: '100%'}}
-                    />
-                </div>
-            );
-        }
-
-        return (
-            <div>
-                <h1>Сканирование QR-Кода</h1>
-                <div style={styles.qrcode}>
-                    {output.reader}
-                    {output.result}
-                </div>
+    if (isOpen) {
+        output.reader = (
+            <div style={styles.reader}>
+                <QrReader
+                    delay={300}
+                    onError={handleError}
+                    onResult={handleScan}
+                    style={{width: '100%'}}
+                    constraints={{facingMode: 'environment'}}
+                    // constraints={{facingMode: 'user'}}
+                />
             </div>
         );
     }
+    return (
+        <div>
+            <h1>Сканирование QR-Кода</h1>
+            <div>
+                {output.reader}
+            </div>
+        </div>
+    );
 }
 
-export default QR
+export default QrReaderComponent

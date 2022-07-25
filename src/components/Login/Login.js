@@ -31,21 +31,6 @@ const Login = () => {
                 console.log(err)
                 setError(err.response.data.error)
             })
-        // return fetch('http://localhost:5000/auth/login', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(credentials)
-        // })
-        //     .then(data => data.json())
-        //     .then(((result) => {
-        //         if (result.error) {
-        //             setError(result.error)
-        //         } else {
-        //             setToken(result)
-        //         }
-        //     }))
     }
 
     if (token) {

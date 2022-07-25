@@ -22,7 +22,7 @@ import DeviceListComponent from "../DeviceList/DeviceListComponent";
 
 
 const Header = () => {
-    const [isScannerOpen, setOverlay] = useState(false);
+    const [isScannerOpen, setScannerOpen] = useState(false);
     const [isDefListOpen, setOpenList] = useState(false)
 
     const {token, setToken} = useToken();
@@ -36,7 +36,7 @@ const Header = () => {
     }
 
     const hide_scanner = () => {
-        setOverlay(false)
+        setScannerOpen(false)
     }
 
     const hide_dfb_list = () => {
@@ -79,7 +79,7 @@ const Header = () => {
                 </MDBNavbar>
                 <MDBCollapse show={showNavExternal3}>
                     <div className='menu_element'>
-                        <div className="menu_button" onClick={() => setOverlay(true)}>
+                        <div className="menu_button" onClick={() => setScannerOpen(true)}>
                             Сканировать QR-код
                         </div>
                         <div className="menu_button" onClick={() => setOpenList(true)}>
@@ -91,7 +91,7 @@ const Header = () => {
 
                 <Rodal visible={isScannerOpen} onClose={hide_scanner} height={45} width={95} measure={"%"}>
                     <div>
-                        <QrReaderComponent status={isScannerOpen}/>
+                        <QrReaderComponent status={isScannerOpen} onClose={hide_scanner}/>
                     </div>
                 </Rodal>
                 <Rodal visible={isDefListOpen} onClose={hide_dfb_list} height={75} width={95} measure={"%"}>
