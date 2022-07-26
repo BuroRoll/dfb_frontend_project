@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export let API_URL = 'http://192.168.0.76:5000'
+export let API_URL = 'https://buroroll.cf'
 
 let $api = axios.create({
     baseURL: API_URL
