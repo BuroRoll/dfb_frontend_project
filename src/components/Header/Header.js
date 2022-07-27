@@ -19,11 +19,15 @@ import {
 import useToken from "../../data/useToken";
 import QrReaderComponent from "../QrReader/QrReader";
 import DeviceListComponent from "../DeviceList/DeviceListComponent";
+import AddNewDeviceComponent from '../AddNewDeviceComponent/AddNewDeviceComponent'
+import {ToastContainer} from "react-toastify";
 
 
 const Header = () => {
     const [isScannerOpen, setScannerOpen] = useState(false);
     const [isDefListOpen, setOpenList] = useState(false)
+    const [isAddDeviceOpen, setAddDeviceOpen] = useState(false)
+    const [newDeviceId, setNewDeviceId] = useState()
 
     const {token, setToken} = useToken();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 1224px)'})
@@ -41,6 +45,15 @@ const Header = () => {
 
     const hide_dfb_list = () => {
         setOpenList(false)
+    }
+
+    const hide_add_device = () =>{
+        setAddDeviceOpen(false)
+    }
+
+    const openAddNewDeviceModal = (device_id) =>{
+        setNewDeviceId(device_id)
+        setAddDeviceOpen(true)
     }
 
     if (!token) { //Неавторизованный пользователь
@@ -91,12 +104,26 @@ const Header = () => {
 
                 <Rodal visible={isScannerOpen} onClose={hide_scanner} height={45} width={95} measure={"%"}>
                     <div>
-                        <QrReaderComponent status={isScannerOpen} onClose={hide_scanner}/>
+                        <QrReaderComponent status={isScannerOpen} onClose={hide_scanner} openAddNewDeviceModal={openAddNewDeviceModal}/>
                     </div>
                 </Rodal>
                 <Rodal visible={isDefListOpen} onClose={hide_dfb_list} height={75} width={95} measure={"%"}>
                     <DeviceListComponent onClose={hide_dfb_list}/>
                 </Rodal>
+                <Rodal visible={isAddDeviceOpen} onClose={hide_add_device} height={25} width={95} measure={"%"}>
+                    <AddNewDeviceComponent onClose={hide_add_device} new_device_id={newDeviceId} />
+                </Rodal>
+                <ToastContainer
+                    position="bottom-center"
+                    autoClose={7000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
             </div>
         )
     } else { // Десктопная версия авторизованного пользователя

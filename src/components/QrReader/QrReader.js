@@ -3,6 +3,9 @@ import {QrReader} from 'react-qr-reader';
 import isObject from 'is-plain-obj';
 import $api from "../../api/api_setting";
 
+import 'react-toastify/dist/ReactToastify.css';
+import {toast} from "react-toastify";
+
 const styles = {
     reader: {
         textAlign: 'center',
@@ -12,7 +15,7 @@ const styles = {
     },
 };
 
-const QrReaderComponent = ({status, onClose}) => {
+const QrReaderComponent = ({status, onClose, openAddNewDeviceModal}) => {
     const isOpen = status
     const output = {};
 
@@ -48,23 +51,35 @@ const QrReaderComponent = ({status, onClose}) => {
     }
 
     const addNewDevice = (device_id) => {
-        $api.post('/api/add_defibrillator', {
-            device_id: device_id,
-            defibrillator_name: 'Test Name 1',
-            location: 'Test location 1',
-            lat_coordinate: '56.787320',
-            long_coordinate: '60.523076'
-        })
-            .then(res => {
-                console.log(res.data)
-            })
+        openAddNewDeviceModal(device_id)
     }
 
     const changeDeviceStatus = (device_id) => {
         $api.put(`/api/service_device/${device_id}`)
             .then(res => {
-                console.log(res)
+                const old_status = statusToString(res.data.old_status)
+                const new_status = statusToString(res.data.new_status)
+                const notification = `Статус устройства изменён с "${old_status}" на "${new_status}"`
+                toast.info(notification, {
+                    position: "bottom-center",
+                    autoClose: 7000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             })
+    }
+
+    const statusToString = (status) => {
+        switch (status) {
+            case 'service':
+                return 'сервис'
+            case 'need_service':
+                return 'необходимо обслуживание'
+            case 'ready_to_use':
+                return 'готово к использованию'
+        }
     }
 
     if (isOpen) {
@@ -76,7 +91,6 @@ const QrReaderComponent = ({status, onClose}) => {
                     onResult={handleScan}
                     style={{width: '100%'}}
                     constraints={{facingMode: 'environment'}}
-                    // constraints={{facingMode: 'user'}}
                 />
             </div>
         );

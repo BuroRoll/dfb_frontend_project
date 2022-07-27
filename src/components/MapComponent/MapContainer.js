@@ -116,7 +116,6 @@ const MapComponent = () => {
                 < /GoogleMap>
             </LoadScript>
         )
-
     }
 }
 
