@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Frontend для проекта "Карта дефибрилляторов"
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Проект создан в рамках производственной практики
+<img src="./screenshots/public_map.png" height="90%"/>
+<img src="./screenshots/service_map.png" height="90%"/>
+<div>
+    <img src="./screenshots/mobile_service_map.png" width="49%" title="Общедоступная карта" alt="Общедоступная карта"/>
+    <img src="./screenshots/mobile_service_list.png" width="49%"/>
+</div>
 
-## Available Scripts
+____
+## Что готово:
 
-In the project directory, you can run:
+- :white_check_mark: Публичное api
+    - :white_check_mark: Вывод списка всех доступных устройств
+- :white_check_mark: Api для сотрудников сервиса
+    - :white_check_mark: Добавление новых устройств
+    - :white_check_mark: Обновление статуса устройства(в сервисе/готов к использованию)
+    - :white_check_mark: Логирование всех действий с устройствами
+    - :white_check_mark: Получение логов для конкретного устройства
 
-### `npm start`
+## Что необходимо доделать:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- :black_square_button: Api для устройств
+    - :black_square_button: Получение состояния устройства
+- :black_square_button: Панель администрирования

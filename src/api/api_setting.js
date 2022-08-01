@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export let API_URL = 'https://buroroll.cf'
+export let API_URL = process.env.REACT_APP_API_URL
 
 let $api = axios.create({
     baseURL: API_URL

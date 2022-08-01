@@ -14,7 +14,7 @@ const containerStyle = {
 
 const MapComponent = () => {
     const token = localStorage.getItem('token')
-    const ApiKey = "AIzaSyDiqAGii_tNY8xeQFbT6CFab56gr7hgRVU"
+    const ApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     const [userLocation, setUserLocation] = useState({})
     const [readyToUseItems, setReadyToUseItems] = useState([])
     const [needServiceItems, setNeedServiceItems] = useState([])
